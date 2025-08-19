@@ -10,6 +10,7 @@ extern "C" {
 
 void pwm_init(void);
 
+int pwm_set_duty_cycle(uint16_t port, uint16_t duty_cycle);
 
 #ifdef __cplusplus
 }

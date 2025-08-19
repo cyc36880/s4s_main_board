@@ -57,32 +57,16 @@ void ultr_init(void)
     ptask_1_collection.ptask_ultr = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
 }
 
-
-/**
- * @description: 设置超声波灯光颜色
- * @param {color_rgb_t *} light_rgb 灯光颜色数组 (长度为 ULTR_WS2812_NUM)
- * @return {*}
- */
-int ultr_set_light(color_rgb_t * light_rgb)
+int ultr_set_light_all(uint8_t r, uint8_t g, uint8_t b)
 {
     for (uint16_t i = 0; i < ws2812_config.length; i++)
     {
-        ws2812_set_rgb(&ws2812_config, i, light_rgb[i].r, light_rgb[i].g, light_rgb[i].b);
+        ws2812_set_rgb(&ws2812_config, i, r, g, b);
     }
     return 0;
 }
 
-/**
- * @description: 设置超声波单个灯光颜色
- * @param {color_rgb_t *} light_rgb
- * @return {*}
- */
-int ultr_set_light_sigle(uint8_t index, uint8_t r, uint8_t g, uint8_t b)
-{
-    if (index >= ws2812_config.length) return -1;
-    ws2812_set_rgb(&ws2812_config, index, r, g, b);
-    return 0;
-}
+
 
 /**
  * static functions
@@ -101,12 +85,12 @@ static void ultr_run(ptask_t * ptask)
     if (0 != ultr_get_distance(&distance))
         dev_state = DEV_ERROR;
 
-    element_data_t * element_state = pack_data_get_element_n(ultr_dev.data, "state");
-    if (NULL != element_state)
-        memcpy(element_state->data, &dev_state, element_state->size);
+    element_data_t * element = pack_data_get_element_n(ultr_dev.data, "state");
+    if (NULL != element)
+        memcpy(element->data, &dev_state, element->size);
     if (DEV_OK != dev_state) return;
 
-    element_data_t * element_distance = pack_data_get_element_n(ultr_dev.data, "distance");
-    if (DEV_OK == dev_state && NULL != distance)
-        memcpy(element_distance->data, &distance, element_distance->size);
+    element = pack_data_get_element_n(ultr_dev.data, "distance");
+    if (NULL != element)
+        memcpy(element->data, &distance, element->size);
 }

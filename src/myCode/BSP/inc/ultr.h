@@ -16,10 +16,9 @@ typedef struct
     pack_data_t  * data;
 } ultr_dev_t;
 
-
 void ultr_init(void);
-int ultr_set_light(color_rgb_t * light_rgb);
-int ultr_set_light_sigle(uint8_t index, uint8_t r, uint8_t g, uint8_t b);
+int ultr_set_light_all(uint8_t r, uint8_t g, uint8_t b);
+
 extern ultr_dev_t ultr_dev;
 
 #ifdef __cplusplus

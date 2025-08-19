@@ -32,23 +32,27 @@ int ws2812_init(ws2812_t *config)
     TIM_HandleTypeDef *htim = time_pwm_dma[config->port].htim;
     uint32_t Channel = time_pwm_dma[config->port].Channel;
 
-    // 清空数组
+    // 清空数组; 使得最后位为rest信号
     memset(config->buffer, 0, ws2812_get_occupy_size(config));
 
-    // 开启pwm dma 传输
-    HAL_TIM_PWM_Start_DMA(htim, Channel, (uint32_t *)config->buffer, ws2812_get_occupy_size(config) / sizeof(uint16_t));
+    // 默认0数据位
+    for (uint32_t i=0; i<config->length; i++)
+    {
+        ws2812_set_rgb(config, i, 0, 0, 0);
+    }
+    HAL_TIM_PWM_Start_DMA( htim, Channel, (uint32_t *)config->buffer, ws2812_get_occupy_size(config) / sizeof(uint8_t) );
 
     return 0;
 }
 
-int ws2812_set_rgb(ws2812_t *config, uint16_t num, uint8_t r, uint8_t g, uint8_t b)
+int ws2812_set_rgb(ws2812_t *config, uint32_t index, uint8_t r, uint8_t g, uint8_t b)
 {
     if (NULL == config)
         return -1;
-    if (num >= config->length)
+    if (index >= config->length)
         return -2;
 
-    uint32_t index = num * (3 * 8);
+    index = index * (3 * 8);
 
     for (uint8_t i = 0; i < 8; i++)
     {
@@ -65,7 +69,7 @@ uint32_t ws2812_get_occupy_size(ws2812_t *config)
 {
     if (NULL == config)
         return 0;
-    return (config->length * WS2812_DATA_LEN + WS2812_RST_NUM) * sizeof(uint16_t);
+    return (config->length * WS2812_DATA_LEN + WS2812_REST) * sizeof(uint8_t);
 }
 
 /**

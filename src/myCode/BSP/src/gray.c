@@ -66,8 +66,7 @@ void gray_init(void)
     ptask_base_t ptask_base = {
         .run = gray_run,
     };
-    // ptask_1_collection.ptask_gray = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
-
+    ptask_1_collection.ptask_gray = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
 }
 
 // 发送命令到灰度设备

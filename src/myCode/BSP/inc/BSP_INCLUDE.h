@@ -8,6 +8,7 @@ extern "C" {
 
 #include "./gray.h"
 #include "./ultr.h"
+#include "./encode_motor.h"
 
 
 

@@ -1,0 +1,42 @@
+#ifndef __ENCODER_H__
+#define __ENCODER_H__
+
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+#include "../../myMain.h"
+#include "../inc/interrupt.h"
+
+typedef enum
+{
+    ENCODER_DIRECTION_STOP = 0,
+    ENCODER_DIRECTION_FORWARD,
+    ENCODER_DIRECTION_BACKWARD
+} encoder_direction_t;
+
+typedef struct 
+{
+    int32_t count;
+    int32_t count_last;
+    int32_t speed;
+    encoder_direction_t  direction;
+    interrupt_gpio_t * gpio;
+} encoder_t;
+
+int encoder_init(void);
+
+
+extern encoder_t encoder0;
+extern encoder_t encoder1;
+extern encoder_t encoder2;
+extern encoder_t encoder3;
+
+#ifdef __cplusplus
+}
+#endif
+
+
+#endif /* __ENCODER_H__ */
+

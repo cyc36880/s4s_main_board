@@ -9,8 +9,8 @@ extern "C" {
 #include "./ws2812.h"
 #include "./IIC_Port.h"
 #include "./pwm.h"
-
-
+#include "./interrupt.h"
+#include "./encoder.h"
 
 #ifdef __cplusplus
 }
