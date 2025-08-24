@@ -7,10 +7,10 @@ extern "C" {
 #endif
 
 #include "./ws2812.h"
-#include "./IIC_Port.h"
 #include "./pwm.h"
 #include "./interrupt.h"
 #include "./encoder.h"
+#include "./mi2c.h"
 
 #ifdef __cplusplus
 }

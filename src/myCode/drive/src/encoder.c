@@ -1,5 +1,6 @@
 #include "../inc/encoder.h"
 #include "../../SYS/inc/sys.h"
+#include "stdio.h"
 
 static void interrupt_20ms(interrupt_timer_t * i_timer);
 void interrupt_gpio(interrupt_gpio_t * i_gpio);
@@ -15,10 +16,10 @@ int encoder_init(void)
     interrupt_timer_new(interrupt_20ms, 20, NULL, 0xffff);
 
     // 创建中断GPIO，更新编码器的值
-    encoder0.gpio = interrupt_gpio_new(GPIO_PIN_13, interrupt_gpio, NULL, 0xffff);
-    encoder1.gpio = interrupt_gpio_new(GPIO_PIN_15, interrupt_gpio, NULL, 0xffff);
-    encoder2.gpio = interrupt_gpio_new(GPIO_PIN_11, interrupt_gpio, NULL, 0xffff);
-    encoder3.gpio = interrupt_gpio_new(GPIO_PIN_14, interrupt_gpio, NULL, 0xffff);
+    encoder0.gpio = interrupt_gpio_new(GPIO_PIN_5,  interrupt_gpio, NULL, 0xffff);
+    encoder1.gpio = interrupt_gpio_new(GPIO_PIN_4,  interrupt_gpio, NULL, 0xffff);
+    encoder2.gpio = interrupt_gpio_new(GPIO_PIN_12, interrupt_gpio, NULL, 0xffff);
+    encoder3.gpio = interrupt_gpio_new(GPIO_PIN_11, interrupt_gpio, NULL, 0xffff);
 	
 	return 0;
 }
@@ -47,18 +48,18 @@ void interrupt_gpio(interrupt_gpio_t * i_gpio)
 {
     if(i_gpio == encoder0.gpio)
     {
-        encoder0.count += PCin(14)==0 ? 1 : -1;
+        encoder0.count += PCin(13)==0 ? 1 : -1;
     }
     else if(i_gpio == encoder1.gpio)
     {
-        encoder0.count += PAin(12)==0 ? 1 : -1;
+        encoder1.count += PCin(14)==0 ? 1 : -1;
     }
     else if(i_gpio == encoder2.gpio)
     {
-        encoder0.count += PAin(10)==0 ? 1 : -1;
+        encoder2.count += PCin(15)==0 ? 1 : -1;
     }
     else if(i_gpio == encoder3.gpio)
     {
-        encoder0.count += PBin(15)==0 ? 1 : -1;
+        encoder3.count += PBin(15)==0 ? 1 : -1;
     }
 }

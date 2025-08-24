@@ -1,19 +1,20 @@
 #include "../inc/gray.h"
 
-#include "../../drive/inc/IIC_Port.h"
 #include "string.h"
+#include "../../drive/inc/mi2c.h"
 
 static int gray_get_data(uint8_t *data);
-static void gray_run(ptask_t * ptask);
+static void ptask_gray_run(ptask_t * ptask);
 
 /**
  * static variables
  */
-static IIC_DEVICE * gray_dev_handle = NULL; // 灰度设备
 
 static uint8_t dev_state[1] = {DEV_OK};
 static uint8_t dev_value[4] = {0};
 static uint8_t dev_command[1] = {0};
+
+static mi2c_t * gray_mi2c;
 
 static element_data_t element_array[] = {
     [0] = {
@@ -55,16 +56,13 @@ void gray_init(void)
     /**
      * 初始化
      */
-    gray_dev_handle = get_IIC_Port_DevHandle(0);
-    if (NULL == gray_dev_handle) return;
-    gray_dev_handle->set_default(gray_dev_handle);
-    gray_dev_handle->set_addr(gray_dev_handle, GRAY_DEVICE_ADDRESS);
+    gray_mi2c = mi2c_create(GRAY_I2C_PORT, GRAY_DEVICE_ADDRESS, NULL);
 
     /**
      * 创建任务
      */
     ptask_base_t ptask_base = {
-        .run = gray_run,
+        .run = ptask_gray_run,
     };
     ptask_1_collection.ptask_gray = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
 }
@@ -72,9 +70,7 @@ void gray_init(void)
 // 发送命令到灰度设备
 int gray_send_command(uint8_t command)
 {
-    if (NULL == gray_dev_handle)
-        return -1;
-    return gray_dev_handle->writeBytes(gray_dev_handle, &command, 1);
+    return mi2c_write_bytes(gray_mi2c, &command, 1);
 }
 
 
@@ -85,14 +81,13 @@ int gray_send_command(uint8_t command)
 // 得到四路+命令
 static int gray_get_data(uint8_t *data)
 {
-    if (NULL == gray_dev_handle) return -1;
-    return gray_dev_handle->readBytes(gray_dev_handle, data, 5);
+    return mi2c_read_bytes(gray_mi2c, data, 7);
 }
 
 
 
 // 灰度实时运行任务
-static void gray_run(ptask_t * ptask)
+static void ptask_gray_run(ptask_t * ptask)
 {
     uint8_t data[5] = {0};
     DEV_STATE dev_state = DEV_OK;

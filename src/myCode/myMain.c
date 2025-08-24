@@ -8,6 +8,7 @@ ptask_1_collection_t ptask_1_collection = {0};
 
 void setup(void)
 {
+    delay_init(72);
     zst_init();      // 初始化 zst
     hardware_init(); // 系统硬件驱动初始化
     ptask_root_1_collection.ptask_root_1 = ptask_root_create(&zst_ptask_list, NULL); // 创建根任务

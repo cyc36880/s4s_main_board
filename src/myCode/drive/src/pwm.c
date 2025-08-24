@@ -1,8 +1,8 @@
 /*
  * @Author       : 蔡雅超 (ZIShen)
- * @LastEditors  : zishen
+ * @LastEditors  : ZIShen
  * @Date         : 2025-08-15 13:58:48
- * @LastEditTime : 2025-08-19 22:22:54
+ * @LastEditTime : 2025-08-21 16:06:00
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -21,10 +21,6 @@ static const time_pwm_dma_t time_pwm_dma[] = {
     {&htim2, TIM_CHANNEL_2},
     {&htim2, TIM_CHANNEL_3},
     {&htim2, TIM_CHANNEL_4},
-    {&htim3, TIM_CHANNEL_1},
-    {&htim3, TIM_CHANNEL_2},
-    {&htim3, TIM_CHANNEL_3},
-    {&htim3, TIM_CHANNEL_4},
 };
 
 
@@ -35,11 +31,6 @@ void pwm_init(void)
     HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2);
     HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_3);
     HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
-
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1);
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2);
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3);
-    HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4);
 }
 
 /**

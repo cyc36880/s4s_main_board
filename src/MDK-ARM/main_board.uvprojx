@@ -10,7 +10,7 @@
       <TargetName>main_board</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5060960::V5.06 update 7 (build 960)::.\ARMCC</pCCUsed>
+      <pCCUsed>5050106::V5.05 update 1 (build 106)::ARMCC</pCCUsed>
       <uAC6>0</uAC6>
       <TargetOption>
         <TargetCommonOption>
@@ -687,31 +687,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>component/udcheck</GroupName>
-          <Files>
-            <File>
-              <FileName>udc_core.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myCode\component\udcheck\src\core\udc_core.c</FilePath>
-            </File>
-            <File>
-              <FileName>udc_event.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myCode\component\udcheck\src\core\udc_event.c</FilePath>
-            </File>
-            <File>
-              <FileName>udc_hal_tick.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myCode\component\udcheck\src\hal\udc_hal_tick.c</FilePath>
-            </File>
-            <File>
-              <FileName>udc_mem.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myCode\component\udcheck\src\misc\udc_mem.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
           <GroupName>misc</GroupName>
           <Files>
             <File>
@@ -740,16 +715,6 @@
               <FilePath>..\myCode\drive\src\ws2812.c</FilePath>
             </File>
             <File>
-              <FileName>Device_IIC.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myCode\drive\src\Device_IIC.c</FilePath>
-            </File>
-            <File>
-              <FileName>IIC_Port.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myCode\drive\src\IIC_Port.c</FilePath>
-            </File>
-            <File>
               <FileName>pwm.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\drive\src\pwm.c</FilePath>
@@ -763,6 +728,11 @@
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\drive\src\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>mi2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\drive\src\mi2c.c</FilePath>
             </File>
           </Files>
         </Group>

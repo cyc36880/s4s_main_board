@@ -9,7 +9,7 @@ extern "C" {
 #include "../../myMain.h"
 #include "../../misc/inc/data_structure.h"
 
-#define GRAY_DEVICE_ADDRESS 0x6A // 灰度设备地址
+#define GRAY_DEVICE_ADDRESS 0x6F // 灰度设备地址
 
 typedef enum
 {
