@@ -11,6 +11,7 @@ extern "C" {
 #include "./interrupt.h"
 #include "./encoder.h"
 #include "./mi2c.h"
+#include "./d_adc.h"
 
 #ifdef __cplusplus
 }

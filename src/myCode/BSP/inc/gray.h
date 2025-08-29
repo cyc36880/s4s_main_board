@@ -7,7 +7,6 @@ extern "C" {
 #endif
 
 #include "../../myMain.h"
-#include "../../misc/inc/data_structure.h"
 
 #define GRAY_DEVICE_ADDRESS 0x6F // 灰度设备地址
 

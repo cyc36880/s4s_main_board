@@ -262,11 +262,3 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
     }
     gpio_lock = UNLOCK;
 }
-
-// i2c 错误中断
-void HAL_I2C_ErrorCallback(I2C_HandleTypeDef *hi2c)
-{
-    HAL_I2C_MspDeInit(hi2c);
-    HAL_I2C_MspInit(hi2c);
-}
-

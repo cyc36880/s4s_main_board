@@ -11,8 +11,9 @@ extern "C" {
 typedef struct 
 {
     char * name;
-    uint8_t * data;
+    void * data;
     uint16_t size;
+    uint8_t change_flag : 1;
 } element_data_t;
 
 typedef struct 

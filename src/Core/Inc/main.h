@@ -59,14 +59,10 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define encoder_i_0_Pin GPIO_PIN_13
 #define encoder_i_0_GPIO_Port GPIOC
-#define encoder_i_1_Pin GPIO_PIN_14
-#define encoder_i_1_GPIO_Port GPIOC
-#define encoder_i_2_Pin GPIO_PIN_15
-#define encoder_i_2_GPIO_Port GPIOC
-#define I2C2_SCL_M_BOARD_Pin GPIO_PIN_10
-#define I2C2_SCL_M_BOARD_GPIO_Port GPIOB
-#define I2C2_SDA_M_BOARD_Pin GPIO_PIN_11
-#define I2C2_SDA_M_BOARD_GPIO_Port GPIOB
+#define encoder_i_2_Pin GPIO_PIN_12
+#define encoder_i_2_GPIO_Port GPIOB
+#define encoder_i_1_Pin GPIO_PIN_13
+#define encoder_i_1_GPIO_Port GPIOB
 #define ULTR_cap_Pin GPIO_PIN_14
 #define ULTR_cap_GPIO_Port GPIOB
 #define ULTR_cap_EXTI_IRQn EXTI15_10_IRQn

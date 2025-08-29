@@ -52,11 +52,11 @@ void interrupt_gpio(interrupt_gpio_t * i_gpio)
     }
     else if(i_gpio == encoder1.gpio)
     {
-        encoder1.count += PCin(14)==0 ? 1 : -1;
+        encoder1.count += PBin(13)==0 ? 1 : -1;
     }
     else if(i_gpio == encoder2.gpio)
     {
-        encoder2.count += PCin(15)==0 ? 1 : -1;
+        encoder2.count += PBin(12)==0 ? 1 : -1;
     }
     else if(i_gpio == encoder3.gpio)
     {

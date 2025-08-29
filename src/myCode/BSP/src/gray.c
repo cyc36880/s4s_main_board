@@ -6,9 +6,9 @@
 static int gray_get_data(uint8_t *data);
 static void ptask_gray_run(ptask_t * ptask);
 
-/**
+/*******************
  * static variables
- */
+ *******************/
 
 static uint8_t dev_state[1] = {DEV_OK};
 static uint8_t dev_value[4] = {0};
@@ -46,11 +46,10 @@ gray_dev_t gray_dev = {
 
 
 
-/**
- * external functions
- */
+/********************
+ * initialization
+ *******************/
 
-// 初始化灰度设备
 void gray_init(void)
 {
     /**

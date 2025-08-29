@@ -12,17 +12,17 @@ extern "C" {
 
 #define ZST_USE_ALLOC    1
 #define ZST_TICK_CUSTOM  1
-#define ZST_USE_LOG      0
+#define ZST_USE_LOG      1
 #define ZST_USE_TIMER    1
 #define ZST_USE_EVENT    0
-#define ZST_RUN_ONE      0
+#define ZST_RUN_ONE      1
 #define ZST_USE_PTASK    1
 #define ZST_USE_REGISTER 0
 #define ZST_USE_PID      1
-
+#define ZST_SHA256       0
 
 #if ZST_USE_ALLOC
-    #define ZST_MEM_CUSTOM 1
+    #define ZST_MEM_CUSTOM 0
     #if (ZST_MEM_CUSTOM)
         #define ZST_MEM_CUSTOM_INCLUDE     "stdlib.h"
         #define ZST_MEM_CUSTOM_ALLOC(x)     malloc(x)
@@ -45,7 +45,7 @@ extern "C" {
 
 #if ZST_USE_LOG
     // 0 - 5
-    #define ZST_LOG_LEVEL  5
+    #define ZST_LOG_LEVEL  2
 #endif
 
 /**

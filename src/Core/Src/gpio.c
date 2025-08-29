@@ -50,23 +50,23 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  /*Configure GPIO pins : encoder_i_0_Pin encoder_i_1_Pin encoder_i_2_Pin */
-  GPIO_InitStruct.Pin = encoder_i_0_Pin|encoder_i_1_Pin|encoder_i_2_Pin;
+  /*Configure GPIO pin : encoder_i_0_Pin */
+  GPIO_InitStruct.Pin = encoder_i_0_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
+  HAL_GPIO_Init(encoder_i_0_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : encoder_i_2_Pin encoder_i_1_Pin encoder_i_3_Pin */
+  GPIO_InitStruct.Pin = encoder_i_2_Pin|encoder_i_1_Pin|encoder_i_3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /*Configure GPIO pin : ULTR_cap_Pin */
   GPIO_InitStruct.Pin = ULTR_cap_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(ULTR_cap_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pin : encoder_i_3_Pin */
-  GPIO_InitStruct.Pin = encoder_i_3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(encoder_i_3_GPIO_Port, &GPIO_InitStruct);
 
   /*Configure GPIO pins : encoder_3_Pin encoder_2_Pin */
   GPIO_InitStruct.Pin = encoder_3_Pin|encoder_2_Pin;

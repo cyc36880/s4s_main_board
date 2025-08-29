@@ -40,7 +40,7 @@ struct _interrupt_gpio_
 
 void interrupt_init(void);
 interrupt_timer_t * interrupt_timer_new(interrupt_call_func_t func, uint32_t period, void * param, uint32_t timeout);
-interrupt_timer_01_t * interrupt_timer_01_new(interrupt_01_call_func_t func, void * user_data, uint32_t timeout);
+// interrupt_timer_01_t * interrupt_timer_01_new(interrupt_01_call_func_t func, void * user_data, uint32_t timeout);
 interrupt_gpio_t * interrupt_gpio_new(uint32_t pin, interrupt_gpio_func_t func, void * param, uint32_t timeout);
 
 uint32_t time_get_01_tick(void);

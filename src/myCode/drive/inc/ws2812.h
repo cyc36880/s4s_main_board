@@ -27,6 +27,7 @@ typedef struct
 
 int ws2812_init(ws2812_t *config);
 int ws2812_set_rgb(ws2812_t *config, uint32_t index, uint8_t r, uint8_t g, uint8_t b);
+int ws2812_set_all_rgb(ws2812_t *config, uint8_t r, uint8_t g, uint8_t b);
 uint32_t ws2812_get_occupy_size(ws2812_t *config);
 
 #ifdef __cplusplus

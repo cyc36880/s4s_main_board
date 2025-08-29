@@ -2,12 +2,24 @@
 
 #include "string.h"
 
+/******************
+ * data type
+ *****************/
 typedef struct 
 {
     TIM_HandleTypeDef *htim;
     uint32_t Channel;
 } time_pwm_dma_t;
 
+
+/****************************
+ * static function
+ ***************************/
+
+
+ /******************
+ * static variable
+ *****************/
 static const time_pwm_dma_t time_pwm_dma[] = {
     [0] = {
         .htim = &htim1,
@@ -19,10 +31,10 @@ static const time_pwm_dma_t time_pwm_dma[] = {
     }
 };
 
-/**
- * extern
- */
 
+/**************************
+ * extern functions
+ ************************/
 int ws2812_init(ws2812_t *config)
 {
     if (NULL == config)
@@ -64,6 +76,16 @@ int ws2812_set_rgb(ws2812_t *config, uint32_t index, uint8_t r, uint8_t g, uint8
     return 0;
 }
 
+int ws2812_set_all_rgb(ws2812_t *config, uint8_t r, uint8_t g, uint8_t b)
+{
+    if (NULL == config)
+        return -1;
+    for (uint16_t i=0; i<config->length; i++)
+    {
+        ws2812_set_rgb(config, i, r, g, b);
+    }
+    return 0;
+}
 
 uint32_t ws2812_get_occupy_size(ws2812_t *config)
 {
@@ -72,6 +94,6 @@ uint32_t ws2812_get_occupy_size(ws2812_t *config)
     return (config->length * WS2812_DATA_LEN + WS2812_REST) * sizeof(uint8_t);
 }
 
-/**
- * static
- */
+/****************************
+ * static callback function
+ ***************************/
