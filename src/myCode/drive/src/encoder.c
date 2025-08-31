@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-20 14:35:22
+ * @LastEditTime : 2025-08-31 14:28:07
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #include "../inc/encoder.h"
 #include "../../SYS/inc/sys.h"
 #include "stdio.h"

@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-27 15:53:57
+ * @LastEditTime : 2025-08-31 14:22:20
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #include "../inc/power.h"
 #include "../../drive/inc/ws2812.h"
 #include "../../drive/inc/d_adc.h"
@@ -103,6 +111,12 @@ static void ptask_run_callback(ptask_t * ptask)
  */
 static void set_power_light(uint8_t power)
 {
-
+    static const color_rgb_t rgb[3] = {
+        [0] = {255, 0, 0},
+        [1] = {0, 0, 255},
+        [2] = {0, 255, 0},
+    };
+    const color_rgb_t * color = &rgb[number_map(power, 0, 100 + 1, 0, 2 + 1)];
+    ws2812_set_all_rgb(&ws2812_config, color->r, color->g, color->b);
 }
 

@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-29 15:27:23
+ * @LastEditTime : 2025-08-31 14:28:48
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #include "../inc/d_adc.h"
 
 #include "adc.h"
@@ -37,7 +45,6 @@ uint32_t d_adc_get_val(d_adc_t * adc)
 uint32_t d_adc_get_val_range(d_adc_t * adc, uint32_t min, uint32_t max)
 {
     uint32_t adc_value = d_adc_get_val(adc);
-    printf("adc_value: %d\n", adc_value);
     if (min > max) return 0;
     // 把adc_value映射到[min, max]区间
     return number_map(adc_value, ADC_MIN_VALUE, ADC_MAX_VALUE+1, min, max+1);

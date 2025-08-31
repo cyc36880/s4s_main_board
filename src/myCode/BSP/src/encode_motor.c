@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-20 14:35:22
+ * @LastEditTime : 2025-08-31 14:22:34
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #include "../inc/encode_motor.h"
 
 #include "../../drive/inc/encoder.h"
@@ -39,6 +47,7 @@ typedef struct
 /****************************
  * static function
  ***************************/
+static void interrupt_callback(interrupt_timer_t * i_timer);
 static void ptask_run_callback(ptask_t * ptask);
 
 /********************
@@ -97,14 +106,20 @@ void encode_motor_init(void)
         .run = ptask_run_callback,
     };
     ptask_1_collection.ptask_encoder_motor = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
-
     pack_data_add_list(ENCODER_MOTOR_START_ADDR, &pack_data);
+    interrupt_timer_new(interrupt_callback, 20, NULL, 0xffff);
 }
 
 
 /****************************
  * static callback function
  ***************************/
+static void interrupt_callback(interrupt_timer_t * i_timer)
+{
+
+}
+
+
 static void ptask_run_callback(ptask_t * ptask)
 {
 

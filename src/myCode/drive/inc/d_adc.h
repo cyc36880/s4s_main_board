@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-29 15:27:37
+ * @LastEditTime : 2025-08-31 14:28:57
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #ifndef __D_ADC_H__
 #define __D_ADC_H__
 

@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-27 15:14:24
+ * @LastEditTime : 2025-08-31 14:22:48
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #include "../inc/light_ambient.h"
 
 #include "../../drive/inc/ws2812.h"

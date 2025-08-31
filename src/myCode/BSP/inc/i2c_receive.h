@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-27 18:27:56
+ * @LastEditTime : 2025-08-31 14:26:26
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #ifndef __I2C_RECEIVE_H__
 #define __I2C_RECEIVE_H__
 

@@ -917,6 +917,11 @@
               <FileType>1</FileType>
               <FilePath>..\myCode\drive\src\d_adc.c</FilePath>
             </File>
+            <File>
+              <FileName>d_servo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\drive\src\d_servo.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
