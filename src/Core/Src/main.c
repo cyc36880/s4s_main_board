@@ -87,7 +87,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  __disable_irq();
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -100,8 +100,11 @@ int main(void)
   MX_TIM2_Init();
   MX_TIM3_Init();
   MX_RTC_Init();
+  MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
   setup();
+  __HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE); // 使能接收中断
+  __enable_irq();
   /* USER CODE END 2 */
 
   /* Infinite loop */

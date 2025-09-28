@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-#include "../../myMain.h"
+#include "myMain.h"
 #include "tim.h"
 
 #define WS2812_H           60   // 1 码相对计数值
@@ -33,6 +33,7 @@ uint32_t ws2812_get_occupy_size(ws2812_t *config);
 #ifdef __cplusplus
 }
 #endif
+
 
 
 #endif /* __WS2812_H__ */

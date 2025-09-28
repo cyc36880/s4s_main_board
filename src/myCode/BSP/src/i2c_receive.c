@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-27 18:25:04
- * @LastEditTime : 2025-08-29 17:02:59
+ * @LastEditTime : 2025-09-28 17:15:47
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -12,7 +12,7 @@
 /******************
  * data struct 
  *****************/
-
+#define LOG_TAG "i2c_receive"
 
 /****************************
  * static function
@@ -30,17 +30,25 @@ static element_data_t * target_pack_data = NULL;
 static i2c_receive_state_t i2c_receive_state = I2C_RECEIVE_STATE_IDLE;
 
 /**************************
- * extern functions
+ * global functions
  ************************/
 void i2c_receive_init(void)
 {
     // 创建hash表
     cc_hash_map_new(&pack_data_list, 40, NULL, NULL);
+    if (NULL == pack_data_list)
+        ZST_LOGE(LOG_TAG, "create hash map failed");
+    else
+        ZST_LOGI(LOG_TAG, "create hash map success");
 
     ptask_base_t ptask_base = {
         .run = ptask_run_callback,
     };
     ptask_1_collection.ptask_i2c_receive = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
+    if (NULL == ptask_1_collection.ptask_i2c_receive)
+        ZST_LOGE(LOG_TAG, "create ptask failed");
+    else
+        ZST_LOGI(LOG_TAG, "create ptask success");
 }
 
 
@@ -61,6 +69,7 @@ void pack_data_add_list(uint32_t key, pack_data_t *pack_data)
         }
         else
         {
+            ZST_LOGE(LOG_TAG, "add data to list failed");
             abort();
         }
     }
@@ -193,7 +202,7 @@ int i2crev_clean_receive_finish(element_data_t * data)
 
 
 /****************************
- * static callback function
+ * static function
  ***************************/
 static void ptask_run_callback(ptask_t * ptask)
 {

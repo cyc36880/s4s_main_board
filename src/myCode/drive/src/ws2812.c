@@ -1,3 +1,11 @@
+/*
+ * @Author       : 蔡雅超 (ZIShen)
+ * @LastEditors  : ZIShen
+ * @Date         : 2025-08-14 18:00:40
+ * @LastEditTime : 2025-09-27 19:58:16
+ * @Description  : 
+ * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
+ */
 #include "../inc/ws2812.h"
 
 #include "string.h"

@@ -22,6 +22,7 @@ extern "C" {
 #define ZST_SHA256       0
 
 #if ZST_USE_ALLOC
+    #define ZST_MEM_LOG    1
     #define ZST_MEM_CUSTOM 0
     #if (ZST_MEM_CUSTOM)
         #define ZST_MEM_CUSTOM_INCLUDE     "stdlib.h"
@@ -31,6 +32,11 @@ extern "C" {
     #else
         // for how many k bytes
         #define ZST_MEM_SIZE (15)
+        #if (ZST_MEM_LOG && ZST_USE_LOG)
+            #define tlsf_assert(expr) do {if(!(expr)) ZST_LOGE("tlsf", "%s", #expr);}while(0)
+        #else
+            #define tlsf_assert(expr)
+        #endif
     #endif
 #endif
 
@@ -44,8 +50,8 @@ extern "C" {
 
 
 #if ZST_USE_LOG
-    // 0 - 5
-    #define ZST_LOG_LEVEL  2
+    // 0 - 6
+    #define ZST_LOG_LEVEL  4
 #endif
 
 /**

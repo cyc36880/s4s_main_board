@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "../../myMain.h"
+#include "myMain.h"
 
 void light_ambient_init(void);
 

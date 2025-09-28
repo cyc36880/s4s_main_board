@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-20 14:35:22
- * @LastEditTime : 2025-08-31 14:28:17
+ * @LastEditTime : 2025-09-26 16:31:11
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "../../myMain.h"
+#include "myMain.h"
 #include "../inc/interrupt.h"
 
 typedef enum
@@ -35,11 +35,7 @@ typedef struct
 
 int encoder_init(void);
 
-
-extern encoder_t encoder0;
-extern encoder_t encoder1;
-extern encoder_t encoder2;
-extern encoder_t encoder3;
+extern encoder_t encoder[4];
 
 #ifdef __cplusplus
 }

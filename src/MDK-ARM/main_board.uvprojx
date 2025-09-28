@@ -10,8 +10,8 @@
       <TargetName>main_board</TargetName>
       <ToolsetNumber>0x4</ToolsetNumber>
       <ToolsetName>ARM-ADS</ToolsetName>
-      <pCCUsed>5050106::V5.05 update 1 (build 106)::ARMCC</pCCUsed>
-      <uAC6>0</uAC6>
+      <pCCUsed>::::</pCCUsed>
+      <uAC6>1</uAC6>
       <TargetOption>
         <TargetCommonOption>
           <Device>STM32F103C8</Device>
@@ -81,7 +81,7 @@
           </BeforeMake>
           <AfterMake>
             <RunUserProg1>0</RunUserProg1>
-            <RunUserProg2>1</RunUserProg2>
+            <RunUserProg2>0</RunUserProg2>
             <UserProg1Name></UserProg1Name>
             <UserProg2Name></UserProg2Name>
             <UserProg1Dos16Mode>0</UserProg1Dos16Mode>
@@ -323,13 +323,13 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>3</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
             <uGnu>1</uGnu>
             <useXO>0</useXO>
-            <v6Lang>5</v6Lang>
+            <v6Lang>3</v6Lang>
             <v6LangP>3</v6LangP>
             <vShortEn>1</vShortEn>
             <vShortWch>1</vShortWch>
@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32F103xB</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../myCode;../myCode/component/zs_tools</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc;../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32F1xx/Include;../Drivers/CMSIS/Include;../myCode/component/zs_tools;../myCode/component;../myCode</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -723,6 +723,11 @@
           <GroupName>component/zs_tools</GroupName>
           <Files>
             <File>
+              <FileName>zst_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\myCode\component\zst_conf.h</FilePath>
+            </File>
+            <File>
               <FileName>cc_array.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\component\zs_tools\src\container\src\cc_array.c</FilePath>
@@ -843,11 +848,6 @@
               <FilePath>..\myCode\component\zs_tools\src\zst_core.c</FilePath>
             </File>
             <File>
-              <FileName>zst_conf.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>..\myCode\component\zst_conf.h</FilePath>
-            </File>
-            <File>
               <FileName>pid.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\component\zs_tools\src\misc\pid.c</FilePath>
@@ -856,6 +856,51 @@
               <FileName>sha256.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\component\zs_tools\src\misc\sha256.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>component/udcheck</GroupName>
+          <Files>
+            <File>
+              <FileName>udc_conf.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>..\myCode\component\udc_conf.h</FilePath>
+            </File>
+            <File>
+              <FileName>udc_core.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\component\udcheck\src\core\udc_core.c</FilePath>
+            </File>
+            <File>
+              <FileName>udc_event.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\component\udcheck\src\core\udc_event.c</FilePath>
+            </File>
+            <File>
+              <FileName>udc_hal_tick.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\component\udcheck\src\hal\udc_hal_tick.c</FilePath>
+            </File>
+            <File>
+              <FileName>udc_mem.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\component\udcheck\src\misc\udc_mem.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>component/BMI270</GroupName>
+          <Files>
+            <File>
+              <FileName>bmi2.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\component\BMI270\bmi2.c</FilePath>
+            </File>
+            <File>
+              <FileName>bmi270.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\component\BMI270\bmi270.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -893,11 +938,6 @@
               <FilePath>..\myCode\drive\src\ws2812.c</FilePath>
             </File>
             <File>
-              <FileName>pwm.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\myCode\drive\src\pwm.c</FilePath>
-            </File>
-            <File>
               <FileName>interrupt.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\drive\src\interrupt.c</FilePath>
@@ -921,6 +961,21 @@
               <FileName>d_servo.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\drive\src\d_servo.c</FilePath>
+            </File>
+            <File>
+              <FileName>motor.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\drive\src\motor.c</FilePath>
+            </File>
+            <File>
+              <FileName>d_bmi270.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\drive\src\d_bmi270.c</FilePath>
+            </File>
+            <File>
+              <FileName>d_voice.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\drive\src\d_voice.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -961,6 +1016,16 @@
               <FileName>i2c_receive.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\myCode\BSP\src\i2c_receive.c</FilePath>
+            </File>
+            <File>
+              <FileName>gyro.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\BSP\src\gyro.c</FilePath>
+            </File>
+            <File>
+              <FileName>voice.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\myCode\BSP\src\voice.c</FilePath>
             </File>
           </Files>
         </Group>

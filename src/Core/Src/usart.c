@@ -120,11 +120,21 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+void uart1_send_bytes(const uint8_t *buf, uint16_t len)
+{
+  while (len--)
+  {
+    while((USART1->SR&0X40)==0);
+    USART1->DR = *buf++;
+  }
+}
+
 int fputc(int ch, FILE *f)
 { 	
 	while((USART1->SR&0X40)==0);
 	USART1->DR = (uint8_t) ch;    
-  
   return ch;
 }
+
 /* USER CODE END 1 */

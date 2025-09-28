@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-27 16:50:27
- * @LastEditTime : 2025-08-31 14:26:15
+ * @LastEditTime : 2025-09-27 10:54:32
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -14,7 +14,7 @@
 extern "C" {
 #endif
 
-#include "../../myMain.h"
+#include "myMain.h"
 
 void servo_init(void);
 

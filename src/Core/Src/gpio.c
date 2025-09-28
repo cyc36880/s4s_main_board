@@ -50,43 +50,41 @@ void MX_GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
-  /*Configure GPIO pin : encoder_i_0_Pin */
-  GPIO_InitStruct.Pin = encoder_i_0_Pin;
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOB, motor3_dir_Pin|motor2_dir_Pin|motor1_dir_Pin|motor0_dir_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin : charging_Pin */
+  GPIO_InitStruct.Pin = charging_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(encoder_i_0_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(charging_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : encoder_i_2_Pin encoder_i_1_Pin encoder_i_3_Pin */
-  GPIO_InitStruct.Pin = encoder_i_2_Pin|encoder_i_1_Pin|encoder_i_3_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  /*Configure GPIO pins : motor3_dir_Pin motor2_dir_Pin motor1_dir_Pin motor0_dir_Pin */
+  GPIO_InitStruct.Pin = motor3_dir_Pin|motor2_dir_Pin|motor1_dir_Pin|motor0_dir_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : eccoder_0_Pin eccoder_1_Pin eccoder_2_Pin eccoder_3_Pin */
+  GPIO_InitStruct.Pin = eccoder_0_Pin|eccoder_1_Pin|eccoder_2_Pin|eccoder_3_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : ULTR_cap_Pin */
-  GPIO_InitStruct.Pin = ULTR_cap_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
-  GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(ULTR_cap_GPIO_Port, &GPIO_InitStruct);
-
-  /*Configure GPIO pins : encoder_3_Pin encoder_2_Pin */
-  GPIO_InitStruct.Pin = encoder_3_Pin|encoder_2_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  /*Configure GPIO pins : eccoder_io_3_Pin eccoder_io_2_Pin eccoder_io_1_Pin */
+  GPIO_InitStruct.Pin = eccoder_io_3_Pin|eccoder_io_2_Pin|eccoder_io_1_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : encoder_1_Pin encoder_0_Pin */
-  GPIO_InitStruct.Pin = encoder_1_Pin|encoder_0_Pin;
-  GPIO_InitStruct.Mode = GPIO_MODE_IT_RISING;
+  /*Configure GPIO pin : eccoder_io_0_Pin */
+  GPIO_InitStruct.Pin = eccoder_io_0_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = GPIO_PULLUP;
-  HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
+  HAL_GPIO_Init(eccoder_io_0_GPIO_Port, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI4_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI4_IRQn);
-
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
-  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
-
   HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 

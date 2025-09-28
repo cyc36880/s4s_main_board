@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-27 18:27:56
- * @LastEditTime : 2025-08-31 14:26:26
+ * @LastEditTime : 2025-09-24 18:55:11
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -13,8 +13,8 @@
 extern "C" {
 #endif
 
-#include "../../myMain.h"
-#include "../../misc/inc/data_structure.h"
+#include "myMain.h"
+#include "misc/inc/data_structure.h"
 
 #define PACK_DATA_CHECK_CHANGE_FOREACH(p_pack_data, p_element_data, active) \
     do                                                                      \

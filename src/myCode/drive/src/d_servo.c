@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-30 10:29:57
- * @LastEditTime : 2025-08-31 14:29:07
+ * @LastEditTime : 2025-09-24 17:44:39
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -33,7 +33,8 @@ servo_t * d_servo_create(uint8_t channel)
 int d_servo_set_angle(servo_t * servo, uint8_t angle)
 {
     if (NULL == servo) return -1;
-    size_t pulse_width = number_map(angle, 0, 180, PWM_MIN, PWM_MAX);
+    angle = myMin(angle, 180);
+    size_t pulse_width = number_map(angle, 0, 180 + 1, PWM_MIN, PWM_MAX + 1);
     if (0 == servo->channel)
     {
         __HAL_TIM_SET_COMPARE(&htim3, TIM_CHANNEL_1, pulse_width);

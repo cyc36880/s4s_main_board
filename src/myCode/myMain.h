@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-14 16:50:18
- * @LastEditTime : 2025-08-29 19:52:39
+ * @LastEditTime : 2025-09-28 17:11:03
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -15,10 +15,10 @@ extern "C" {
 #endif
 
 #include "main.h"
-#include "./component/zs_tools/src/zst_core.h"
-#include "./sys/inc/sys.h"
-#include "./sys/inc/delay.h"
-#include "./misc/inc/mtools.h"
+#include "component/zs_tools/src/zst_core.h"
+#include "sys/inc/sys.h"
+#include "sys/inc/delay.h"
+#include "misc/inc/mtools.h"
 
 #include "stdio.h"
 #include "string.h"
@@ -43,6 +43,8 @@ typedef struct
     ptask_t * ptask_power;         // 电源管理
     ptask_t * ptask_servo;         // 舵机
     ptask_t * ptask_encoder_motor; // 编码电机
+    ptask_t * ptask_gyro;          // 陀螺仪
+    ptask_t * ptask_voice;         // 语音
     
     ptask_t * ptask_i2c_receive;   // I2C 接收
 } ptask_1_collection_t;
@@ -62,24 +64,29 @@ enum I2C_DEVICE_ADDR
     RTC_START_ADDR,                 // RTC （时间、日期）
     I2C_DEVICE_ADDR_SPACE(RTC_START_ADDR, 5),
 
-    SERVO_MOTOR_START_ADDR,        // 舵机 x2
+    SERVO_MOTOR_START_ADDR,         // 舵机 x2
     I2C_DEVICE_ADDR_SPACE(SERVO_MOTOR_START_ADDR, 5),
 
-    ENCODER_MOTOR_START_ADDR = 80,      // 编码电机 x4
-    I2C_DEVICE_ADDR_SPACE(ENCODER_MOTOR_START_ADDR, 10),
+    GYRO_START_ADDR,                 // 陀螺仪
+    I2C_DEVICE_ADDR_SPACE(GYRO_START_ADDR, 10),
+
+    ENCODER_MOTOR0_START_ADDR = 80, // 编码电机0
+    I2C_DEVICE_ADDR_SPACE(ENCODER_MOTOR0_START_ADDR, 10),
+    ENCODER_MOTOR1_START_ADDR,      // 编码电机1
+    I2C_DEVICE_ADDR_SPACE(ENCODER_MOTOR1_START_ADDR, 10),
+    ENCODER_MOTOR2_START_ADDR,      // 编码电机2
+    I2C_DEVICE_ADDR_SPACE(ENCODER_MOTOR2_START_ADDR, 10),
+    ENCODER_MOTOR3_START_ADDR,      // 编码电机3
+    I2C_DEVICE_ADDR_SPACE(ENCODER_MOTOR3_START_ADDR, 10),
 
     I2C_DEVICE_TITLE,
 };
-
+// 氛围灯
 #define WS2812_M_BOARD_PORT 0
-#define WS2812_M_BOARD_NUM  20
-
-#define WS2812_POWER_PORT   0
+#define WS2812_M_BOARD_NUM  3
+// 电量指示灯
+#define WS2812_POWER_PORT   1
 #define WS2812_POWER_NUM    1
-// #define WS2812_ULTR_PORT    1
-
-// #define GRAY_I2C_PORT       0
-
 
 extern ptask_root_1_collection_t ptask_root_1_collection;
 extern ptask_1_collection_t ptask_1_collection;

@@ -1,0 +1,8 @@
+{
+	"InstallScripts" : 
+	[
+		"D:/Desktop/s4s/src/src/main_board/test/udc/build/cmake_install.cmake",
+		"D:/Desktop/s4s/src/src/main_board/test/udc/build/udcheck_bin/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

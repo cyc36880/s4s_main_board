@@ -14,9 +14,9 @@
 extern "C" {
 #endif
 
-#include "../../myMain.h"
+#include "myMain.h"
 
-#define ENCODE_MOTOR_NUM   4
+#define ENCODER_MOTOR_NUM       4 // 编码电机数量
 
 void encode_motor_init(void);
 

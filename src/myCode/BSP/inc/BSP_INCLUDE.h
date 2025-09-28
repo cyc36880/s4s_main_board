@@ -14,14 +14,14 @@
 extern "C" {
 #endif
 
-// #include "./gray.h"
-// #include "./ultr.h"
+
 #include "./encode_motor.h"
 #include "./mRTC.h"
 #include "./light_ambient.h"
 #include "./power.h"
 #include "./servo.h"
 #include "./i2c_receive.h"
+#include "./gyro.h"
 
 #ifdef __cplusplus
 }

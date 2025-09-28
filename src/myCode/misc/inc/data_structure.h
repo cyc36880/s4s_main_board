@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-#include "../../myMain.h"
+#include "myMain.h"
 
 typedef struct 
 {
@@ -21,6 +21,7 @@ typedef struct
     char * name;
     element_data_t * elements_array;
     uint16_t size;
+    void * user_data;
 } pack_data_t;
 
 typedef struct 
@@ -37,7 +38,7 @@ typedef struct
     };
 } color_rgb_t;
 
-element_data_t * pack_data_get_element_n(pack_data_t * pack, const char * name);
+element_data_t * pack_data_get_element_4name(pack_data_t * pack, const char * name);
 uint16_t pack_data_get_total_size(pack_data_t * pack);
 
 

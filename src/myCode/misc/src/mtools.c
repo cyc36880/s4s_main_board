@@ -37,3 +37,43 @@ size_t number_map(size_t x, size_t in_min, size_t in_max, size_t out_min, size_t
     return (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
+int myMax(int a, int b)
+{
+    return a > b ? a : b;
+}
+
+int myMin(int a, int b)
+{
+    return a < b ? a : b;
+}
+
+int myAbs(int a)
+{
+    return a > 0 ? a : -a;
+}
+
+
+int16_t array_data_to_int16(uint8_t * array)
+{
+    return (int16_t)(array[0] << 8 | array[1]);
+}
+
+int32_t array_data_to_int32(uint8_t * array)
+{
+    return (int32_t)(array[0] << 24 | array[1] << 16 | array[2] << 8 | array[3]);
+}
+
+void int16_to_array_data(int16_t data, uint8_t * array)
+{
+    array[0] = (data >> 8) & 0xFF;
+    array[1] = data & 0xFF;
+}
+void int32_to_array_data(int32_t data, uint8_t * array)
+{
+    array[0] = (data >> 24) & 0xFF;
+    array[1] = (data >> 16) & 0xFF;
+    array[2] = (data >> 8) & 0xFF;
+    array[3] = data & 0xFF;
+}
+
+

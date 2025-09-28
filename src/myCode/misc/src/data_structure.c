@@ -2,7 +2,7 @@
 
 #include "string.h"
 
-element_data_t * pack_data_get_element_n(pack_data_t * pack, const char * name)
+element_data_t * pack_data_get_element_4name(pack_data_t * pack, const char * name)
 {
     if (pack == NULL || name == NULL) return NULL;
 
