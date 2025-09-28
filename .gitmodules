@@ -1,3 +1,9 @@
 [submodule "src/myCode/component/zs_tools"]
 	path = src/myCode/component/zs_tools
 	url = git@github.com:cyc36880/zs_tools.git
+[submodule "src/myCode/component/BMI270"]
+	path = src/myCode/component/BMI270
+	url = git@github.com:boschsensortec/BMI270_SensorAPI.git
+[submodule "src/myCode/component/udcheck"]
+	path = src/myCode/component/udcheck
+	url = git@github.com:cyc36880/udcheck.git
