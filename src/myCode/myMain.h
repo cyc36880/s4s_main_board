@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-14 16:50:18
- * @LastEditTime : 2025-09-28 17:11:03
+ * @LastEditTime : 2025-09-29 16:10:40
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -69,6 +69,9 @@ enum I2C_DEVICE_ADDR
 
     GYRO_START_ADDR,                 // 陀螺仪
     I2C_DEVICE_ADDR_SPACE(GYRO_START_ADDR, 10),
+
+    VOICE_START_ADDR,                // 语音
+    I2C_DEVICE_ADDR_SPACE(VOICE_START_ADDR, 5),
 
     ENCODER_MOTOR0_START_ADDR = 80, // 编码电机0
     I2C_DEVICE_ADDR_SPACE(ENCODER_MOTOR0_START_ADDR, 10),

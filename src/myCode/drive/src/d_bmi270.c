@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-09-27 09:59:51
- * @LastEditTime : 2025-09-28 17:32:37
+ * @LastEditTime : 2025-09-29 11:29:22
  * @Description  :
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -103,6 +103,11 @@ void d_bmi270_init(void)
     /****************
      * 初始化传感器
      ***************/
+    if (0 != HAL_I2C_IsDeviceReady(&hi2c1, dev_addr << 1, 5, 1000)) 
+    {
+        ZST_LOGE(LOG_TAG, "bmi270 device not found!");
+        return;
+    }
     bmi270_device_init();
     if (0 == init_success)
     {

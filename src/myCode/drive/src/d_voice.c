@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-09-27 16:17:00
- * @LastEditTime : 2025-09-27 19:58:48
+ * @LastEditTime : 2025-09-29 16:04:50
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -13,8 +13,8 @@
  * data type
  *****************/
 #define LOG_TAG "d_voice"
-#define UDC_VOICE_RECEIVE_BUF_SIZE 128
-#define UDC_VOICE_TRANSMIT_BUF_SIZE 128
+#define UDC_VOICE_RECEIVE_BUF_SIZE  64
+#define UDC_VOICE_TRANSMIT_BUF_SIZE 64
 
 
 /****************************
@@ -87,8 +87,14 @@ static void ptask_run_callback(ptask_t * ptask)
 // udc 接收完成回调
 static void udc_receive_finshed_event_cb(udc_event_t * e)
 {
-    udc_pack_t * udc_pack = udc_event_get_target(e);
-
+    #if (ZST_USE_LOG > 0)
+        udc_obj_t _udc_obj;
+        udc_pack_t * _udc_pack = udc_event_get_target(e);
+        UDC_PACK_OBJ_FOREACH(UDC_PACK_RECEIVE, _udc_pack, &_udc_obj, 
+            ZST_LOG("id: %d, size : %d", _udc_obj.id, _udc_obj.size);
+        );
+    #endif
+    
 }
 
 static int calculate_verify(const struct _udc_pack_t *pack, const uint8_t *buf, uint16_t len, uint8_t *verify)

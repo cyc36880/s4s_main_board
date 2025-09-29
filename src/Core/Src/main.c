@@ -103,7 +103,6 @@ int main(void)
   MX_I2C2_Init();
   /* USER CODE BEGIN 2 */
   setup();
-  __HAL_UART_ENABLE_IT(&huart1, UART_IT_RXNE); // 使能接收中断
   __enable_irq();
   /* USER CODE END 2 */
 

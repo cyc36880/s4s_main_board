@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-27 15:14:24
- * @LastEditTime : 2025-09-27 11:10:47
+ * @LastEditTime : 2025-09-29 16:18:30
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -59,7 +59,7 @@ static element_data_t element_array[] = {
     }
 };
 static pack_data_t pack_data = {
-    .name = "light_ambient",
+    .name = LOG_TAG,
     .elements_array = element_array,
     .size = sizeof(element_array) / sizeof(element_data_t),
 };

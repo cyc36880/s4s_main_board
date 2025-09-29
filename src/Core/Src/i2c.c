@@ -65,6 +65,7 @@ void MX_I2C1_Init(void)
   /* USER CODE BEGIN I2C1_Init 2 */
 
   /* USER CODE END I2C1_Init 2 */
+
 }
 /* I2C2 init function */
 void MX_I2C2_Init(void)

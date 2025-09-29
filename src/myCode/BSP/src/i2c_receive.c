@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-27 18:25:04
- * @LastEditTime : 2025-09-28 17:15:47
+ * @LastEditTime : 2025-09-29 16:19:07
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -28,6 +28,7 @@ static cc_hash_map_t * pack_data_list = NULL;
 static uint8_t target_addr[2] = {0};
 static element_data_t * target_pack_data = NULL;
 static i2c_receive_state_t i2c_receive_state = I2C_RECEIVE_STATE_IDLE;
+
 
 /**************************
  * global functions
