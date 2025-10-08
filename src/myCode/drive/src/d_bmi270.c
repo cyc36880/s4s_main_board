@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-09-27 09:59:51
- * @LastEditTime : 2025-09-29 11:29:22
+ * @LastEditTime : 2025-10-08 11:24:54
  * @Description  :
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -39,6 +39,9 @@
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e);
+static void ptask_run_callback(ptask_t * ptask);
+static void device_init(void);
 static void timer_IMU_callback(zst_timer_t *timer);
 
 void calibrate_gyro(int N, int delay_ms);
@@ -85,6 +88,11 @@ void d_bmi270_init(void)
     /***************
      * 创建任务
      **************/
+    ptask_1_collection.ptask_d_bmi270 = ptask_create(ptask_root_1_collection.ptask_root_1, ptask_event_callback, NULL);
+    if (NULL == ptask_1_collection.ptask_d_bmi270)
+        ZST_LOGE(LOG_TAG, "create ptask failed");
+    else
+        ZST_LOGI(LOG_TAG, "create ptask success");
 
     /****************
      * 创建定时器
@@ -99,36 +107,6 @@ void d_bmi270_init(void)
         ZST_LOGI(LOG_TAG, "create timer success!");
         zst_timer_pause(bmi_timer);
     }
-
-    /****************
-     * 初始化传感器
-     ***************/
-    if (0 != HAL_I2C_IsDeviceReady(&hi2c1, dev_addr << 1, 5, 1000)) 
-    {
-        ZST_LOGE(LOG_TAG, "bmi270 device not found!");
-        return;
-    }
-    bmi270_device_init();
-    if (0 == init_success)
-    {
-        ZST_LOGE(LOG_TAG, "bmi270 init failed!");
-        return;
-    }
-    ZST_LOGI(LOG_TAG, "bmi270 init success!");
-    float ax, ay, az;
-    bmi270_read_accel(&ax, &ay, &az);
-    float roll_init  = atan2f(ay, az);
-    float pitch_init = atan2f(-ax, sqrtf(ay*ay + az*az));
-    float yaw_init   = 0.0f; // 无磁力计
-
-    float cr = cosf(roll_init/2), sr = sinf(roll_init/2);
-    float cp = cosf(pitch_init/2), sp = sinf(pitch_init/2);
-    float cy = cosf(yaw_init/2), sy = sinf(yaw_init/2);
-
-    q0 = cr*cp*cy + sr*sp*sy;
-    q1 = sr*cp*cy - cr*sp*sy;
-    q2 = cr*sp*cy + sr*cp*sy;
-    q3 = cr*cp*sy - sr*sp*cy;
 }
 
 // --------- 外部接口：测量使能 ----------
@@ -201,6 +179,58 @@ void calibrate_gyro(int N, int delay_ms)
 /**************************
  * static functions
  ************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e)
+{
+    switch (ptask_get_code(e))
+    {
+        case PTASK_EVENT_INIT:
+            if (0 == init_success)
+                device_init();
+            break;
+
+        case PTASK_EVENT_RUN:
+            ptask_run_callback(task);
+            break;
+
+        default:
+            break;
+    }
+}
+
+static void ptask_run_callback(ptask_t * ptask)
+{
+    
+}
+
+static void device_init(void)
+{
+    if (0 != HAL_I2C_IsDeviceReady(&hi2c2, dev_addr << 1, 3, 200)) 
+    {
+        ZST_LOGE(LOG_TAG, "bmi270 device not found!");
+        return;
+    }
+    bmi270_device_init();
+    if (0 == init_success)
+    {
+        ZST_LOGE(LOG_TAG, "bmi270 init failed!");
+        return;
+    }
+    ZST_LOGI(LOG_TAG, "bmi270 init success!");
+    float ax, ay, az;
+    bmi270_read_accel(&ax, &ay, &az);
+    float roll_init  = atan2f(ay, az);
+    float pitch_init = atan2f(-ax, sqrtf(ay*ay + az*az));
+    float yaw_init   = 0.0f; // 无磁力计
+
+    float cr = cosf(roll_init/2), sr = sinf(roll_init/2);
+    float cp = cosf(pitch_init/2), sp = sinf(pitch_init/2);
+    float cy = cosf(yaw_init/2), sy = sinf(yaw_init/2);
+
+    q0 = cr*cp*cy + sr*sp*sy;
+    q1 = sr*cp*cy - cr*sp*sy;
+    q2 = cr*sp*cy + sr*cp*sy;
+    q3 = cr*cp*sy - sr*sp*cy;
+}
 
 // imu 数据采集定时器回调; 降低采样率，减小运算量
 static void timer_IMU_callback(zst_timer_t *timer)

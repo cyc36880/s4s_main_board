@@ -60,6 +60,9 @@ static pack_data_t pack_data = {
  *******************/
 void mRTC_init(void)
 {
+    /***************
+     * 创建定时器
+     **************/
     if (NULL == zst_timer_create(&zst_ztimer, timer_callback, 450, NULL))
     {
         ZST_LOGE(LOG_TAG, "zst_timer_create failed");
@@ -69,6 +72,9 @@ void mRTC_init(void)
         ZST_LOGI(LOG_TAG, "zst_timer_create success");
     }
 
+    /***************
+     * 添加数据
+     **************/
     pack_data_add_list(RTC_START_ADDR, &pack_data);
 }
 

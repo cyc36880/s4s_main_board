@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-20 14:35:22
- * @LastEditTime : 2025-09-28 17:50:15
+ * @LastEditTime : 2025-10-08 10:06:45
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -50,6 +50,7 @@ typedef struct
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e);
 static void encoder_motor_timer_callback(zst_timer_t *timer);
 static void ptask_run_callback(ptask_t * ptask);
 
@@ -88,6 +89,9 @@ static pack_data_t pack_data[ ENCODER_MOTOR_NUM ] = {
  ************************/
 void encode_motor_init(void)
 {
+    /***************
+     * 添加数据
+     **************/
     for (uint8_t emi = 0; emi < ENCODER_MOTOR_NUM; emi++)
     {
         element_data_t * element_array_ptr = pack_data[emi].elements_array;
@@ -119,19 +123,24 @@ void encode_motor_init(void)
         pid_init(&device[emi].position_pid_handle, INT32_MAX, 0, 0, 0);
         pid_init(&device[emi].speed_pid_handle, 1000, 0, 0, 0);
     }
-
-    ptask_base_t ptask_base = {
-        .run = ptask_run_callback,
-    };
-    ptask_1_collection.ptask_encoder_motor = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
-    if (NULL == ptask_1_collection.ptask_encoder_motor)
-        ZST_LOGE(LOG_TAG, "create ptask failed");
-    else
-        ZST_LOGI(LOG_TAG, "create ptask success");
     pack_data_add_list(ENCODER_MOTOR0_START_ADDR, &pack_data[0]);
     pack_data_add_list(ENCODER_MOTOR1_START_ADDR, &pack_data[1]);
     pack_data_add_list(ENCODER_MOTOR2_START_ADDR, &pack_data[2]);
     pack_data_add_list(ENCODER_MOTOR3_START_ADDR, &pack_data[3]);
+
+
+    /***************
+     * 创建任务
+     **************/
+    ptask_1_collection.ptask_encoder_motor = ptask_create(ptask_root_1_collection.ptask_root_1, ptask_event_callback, NULL);
+    if (NULL == ptask_1_collection.ptask_encoder_motor)
+        ZST_LOGE(LOG_TAG, "create ptask failed");
+    else
+        ZST_LOGI(LOG_TAG, "create ptask success");
+    
+    /***************
+     * 创建定时器
+     **************/
     zst_timer_create(&i_time_1ms, encoder_motor_timer_callback, 50, NULL);
 }
 
@@ -139,6 +148,18 @@ void encode_motor_init(void)
 /****************************
  * static callback function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e)
+{
+    switch (ptask_get_code(e))
+    {
+        case PTASK_EVENT_RUN:
+            ptask_run_callback(task);
+            break;
+        default:
+            break;
+    }
+}
+
 static void ptask_run_callback(ptask_t * ptask)
 {
     for (uint8_t emi = 0; emi < ENCODER_MOTOR_NUM; emi++)

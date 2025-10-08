@@ -26,6 +26,7 @@ typedef struct
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e);
 static void ptask_run_callback(ptask_t * ptask);
 
 
@@ -57,26 +58,45 @@ static pack_data_t pack_data = {
  ************************/
 void servo_init(void)
 {
-    ptask_base_t ptask_base = {
-        .run = ptask_run_callback,
-    };
-    ptask_1_collection.ptask_servo = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
+    /***************
+     * 创建任务
+     **************/
+    ptask_1_collection.ptask_servo = ptask_create(ptask_root_1_collection.ptask_root_1, ptask_event_callback, NULL);
     if (NULL == ptask_1_collection.ptask_servo)
         ZST_LOGE(LOG_TAG, "create ptask failed");
     else
         ZST_LOGI(LOG_TAG, "create ptask success");
-        
+    
+    /***************
+     * 设备初始化
+     **************/
+    d_servo_set_angle(device[0].servo, 0);
+    d_servo_set_angle(device[1].servo, 0);
+
+    /***************
+     * 添加数据
+     **************/
     device[0].servo = d_servo_create(0);
     device[1].servo = d_servo_create(1);
     pack_data_add_list(SERVO_MOTOR_START_ADDR, &pack_data);
-    d_servo_set_angle(device[0].servo, 0);
-    d_servo_set_angle(device[1].servo, 0);
 };
 
 
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e)
+{
+    switch (ptask_get_code(e))
+    {
+        case PTASK_EVENT_RUN:
+            ptask_run_callback(task);
+            break;
+        default:
+            break;
+    }
+}
+
 static void ptask_run_callback(ptask_t * ptask)
 {
     element_data_t * element_data = NULL;

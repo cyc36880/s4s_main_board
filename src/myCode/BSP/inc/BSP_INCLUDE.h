@@ -22,6 +22,7 @@ extern "C" {
 #include "./servo.h"
 #include "./i2c_receive.h"
 #include "./gyro.h"
+#include "./voice.h"
 
 #ifdef __cplusplus
 }

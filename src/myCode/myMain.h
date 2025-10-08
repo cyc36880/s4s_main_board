@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-14 16:50:18
- * @LastEditTime : 2025-09-29 16:10:40
+ * @LastEditTime : 2025-10-08 09:48:03
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -14,9 +14,9 @@
 extern "C" {
 #endif
 
-#include "main.h"
-#include "component/zs_tools/src/zst_core.h"
+
 #include "sys/inc/sys.h"
+#include "component/zs_tools/src/zst_core.h"
 #include "sys/inc/delay.h"
 #include "misc/inc/mtools.h"
 
@@ -31,19 +31,19 @@ typedef enum
 
 typedef struct 
 {
-    ptask_t * ptask_root_1;
+    ptask_root_t * ptask_root_1;
 } ptask_root_1_collection_t;
 
 typedef struct 
 {
-    ptask_t * ptask_gray;
-    ptask_t * ptask_ultr;
+    ptask_t * ptask_d_bmi270;
     ptask_t * ptask_mrtc;
     ptask_t * ptask_light_ambient; // 氛围灯
     ptask_t * ptask_power;         // 电源管理
     ptask_t * ptask_servo;         // 舵机
     ptask_t * ptask_encoder_motor; // 编码电机
     ptask_t * ptask_gyro;          // 陀螺仪
+    ptask_t * ptask_d_voice;
     ptask_t * ptask_voice;         // 语音
     
     ptask_t * ptask_i2c_receive;   // I2C 接收

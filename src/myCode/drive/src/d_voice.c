@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-09-27 16:17:00
- * @LastEditTime : 2025-09-29 16:04:50
+ * @LastEditTime : 2025-10-08 09:52:33
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -20,6 +20,7 @@
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e);
 static void ptask_run_callback(ptask_t * ptask);
 static void udc_receive_finshed_event_cb(udc_event_t * e);
 static int calculate_verify(const struct _udc_pack_t *pack, const uint8_t *buf, uint16_t len, uint8_t *verify);
@@ -69,16 +70,29 @@ void d_voice_init(void)
     /************************
      * 创建任务
      ***********************/
-    ptask_base_t ptask_base = {
-        .run = ptask_run_callback,
-    };
-    ptask_1_collection.ptask_servo = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
+    ptask_1_collection.ptask_d_voice = ptask_create(ptask_root_1_collection.ptask_root_1, ptask_event_callback, NULL);
+    if (NULL == ptask_1_collection.ptask_d_voice)
+        ZST_LOGE(LOG_TAG, "create ptask failed");
+    else
+        ZST_LOGI(LOG_TAG, "create ptask success");
 }
 
 
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e)
+{
+    switch (ptask_get_code(e))
+    {
+        case PTASK_EVENT_RUN:
+            ptask_run_callback(task);
+            break;
+        default:
+            break;
+    }
+}
+
 static void ptask_run_callback(ptask_t * ptask)
 {
     udc_pack_task();
@@ -94,7 +108,6 @@ static void udc_receive_finshed_event_cb(udc_event_t * e)
             ZST_LOG("id: %d, size : %d", _udc_obj.id, _udc_obj.size);
         );
     #endif
-    
 }
 
 static int calculate_verify(const struct _udc_pack_t *pack, const uint8_t *buf, uint16_t len, uint8_t *verify)

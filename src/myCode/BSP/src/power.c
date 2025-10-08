@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-08-27 15:53:57
- * @LastEditTime : 2025-09-29 16:18:42
+ * @LastEditTime : 2025-10-08 10:07:30
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -26,6 +26,7 @@ typedef struct
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e);
 static void ptask_run_callback(ptask_t * ptask);
 static void set_power_light(uint8_t power);
 
@@ -66,21 +67,28 @@ static pack_data_t pack_data = {
  ************************/
 void power_init(void)
 {
-    ptask_base_t ptask_base = {
-        .run = ptask_run_callback,
-    };
-    ptask_1_collection.ptask_power = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
+    /***************
+     * 创建任务
+     **************/
+    ptask_1_collection.ptask_power = ptask_create(ptask_root_1_collection.ptask_root_1, ptask_event_callback, NULL);
     if (NULL == ptask_1_collection.ptask_power)
         ZST_LOGE(LOG_TAG, "create ptask failed");
     else
         ZST_LOGI(LOG_TAG, "create ptask success");
 
+    /***************
+     * 设备初始化
+     **************/
     adc_battery = d_adc_create(0); // 创建 adc 采集
     ws2812_init(&ws2812_config);   // 初始化ws2812
-    pack_data_add_list(LIGHT_POWER_START_ADDR, &pack_data);
-
+    
     set_power_light(d_adc_get_val_range(adc_battery, 0, 100));
     ws2812_set_all_rgb(&ws2812_config, 0, 0, 0);
+
+    /***************
+     * 添加数据
+     **************/
+    pack_data_add_list(LIGHT_POWER_START_ADDR, &pack_data);
 }
 
 
@@ -88,6 +96,17 @@ void power_init(void)
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e)
+{
+    switch (ptask_get_code(e))
+    {
+        case PTASK_EVENT_RUN:
+            ptask_run_callback(task);
+            break;
+        default:
+            break;
+    }
+}
 
 /**
  * @description: 任务运行回调

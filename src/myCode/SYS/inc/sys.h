@@ -50,16 +50,12 @@
 #define PGin(n)    BIT_ADDR(GPIOG_IDR_Addr,n)  //输入
 
 
+typedef struct
+{
+    uint8_t setup_finsh : 1;
+} sys_state_t;
+
+
+// extern sys_state_t sys_state;
 
 #endif
-
-
-
-
-
-
-
-
-
-
-

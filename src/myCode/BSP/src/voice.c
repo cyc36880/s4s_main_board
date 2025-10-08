@@ -2,7 +2,7 @@
  * @Author       : 蔡雅超 (ZIShen)
  * @LastEditors  : ZIShen
  * @Date         : 2025-09-27 11:17:57
- * @LastEditTime : 2025-09-29 16:17:07
+ * @LastEditTime : 2025-10-08 10:02:48
  * @Description  : 
  * Copyright (c) 2025 Author 蔡雅超 email: 2672632650@qq.com, All Rights Reserved.
  */
@@ -24,6 +24,7 @@ typedef struct
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e);
 static void ptask_run_callback(ptask_t * ptask);
 
 
@@ -50,15 +51,18 @@ static pack_data_t pack_data = {
  ************************/
 void voice_init(void)
 {
-    ptask_base_t ptask_base = {
-        .run = ptask_run_callback,
-    };
-    ptask_1_collection.ptask_gyro = ptask_create(ptask_root_1_collection.ptask_root_1, &ptask_base);
-    if (NULL == ptask_1_collection.ptask_gyro)
+    /***************
+     * 创建任务
+     **************/
+    ptask_1_collection.ptask_voice = ptask_create(ptask_root_1_collection.ptask_root_1, ptask_event_callback, NULL);
+    if (NULL == ptask_1_collection.ptask_voice)
         ZST_LOGE(LOG_TAG, "create ptask failed");
     else
         ZST_LOGI(LOG_TAG, "create ptask success");
-        
+    
+    /***************
+     * 添加数据
+     **************/
     pack_data_add_list(VOICE_START_ADDR, &pack_data);
 }
 
@@ -66,6 +70,18 @@ void voice_init(void)
 /****************************
  * static function
  ***************************/
+static void ptask_event_callback(ptask_t *task, ptask_event_t *e)
+{
+    switch (ptask_get_code(e))
+    {
+        case PTASK_EVENT_RUN:
+            ptask_run_callback(task);
+            break;
+        default:
+            break;
+    }
+}
+
 /**
  * @description: 任务运行回调
  */

@@ -260,6 +260,13 @@ void HAL_I2C_AddrCallback(I2C_HandleTypeDef *hi2c, uint8_t TransferDirection, ui
 {
   UNUSED(hi2c);
   UNUSED(AddrMatchCode);
+  // 没有初始化完成，则直接复位i2c
+  // if (0 == sys_state.setup_finsh)
+  // {
+  //   ZST_LOGE(LOG_TAG, "setup no finshed, but i2c receive data..");
+  //   I2C_Slave_Reset();
+  //   return;
+  // }
 	// 发送数据
 	if(TransferDirection == I2C_DIRECTION_RECEIVE)
 	{

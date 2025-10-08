@@ -56,7 +56,8 @@ void setup(void)
     HAL_I2C_EnableListen_IT(&hi2c1);
 
     zst_init();      // 初始化 zst
-    ptask_root_1_collection.ptask_root_1 = ptask_root_create(&zst_ptask_list, NULL); // 创建根任务
+    ptask_root_1_collection.ptask_root_1 = ptask_root_create(&zst_ptask_list); // 创建根任务
+    ptask_root_select(&zst_ptask_list, ptask_root_1_collection.ptask_root_1); // 选择根任务
     
     hardware_init(); // 系统硬件驱动初始化
     // BSP 初始化
@@ -68,6 +69,7 @@ void setup(void)
     mRTC_init();          // RTC
     servo_init();         // 舵机
     gyro_init();          // 陀螺仪
+    voice_init();         // 语音模块
 }
 
 void loop(void)
